@@ -1,0 +1,5 @@
+[Bridge]
+    Strobe lights
+    And blowing speakers
+    Fireworks
+    And hurricanes
