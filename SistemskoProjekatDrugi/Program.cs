@@ -124,7 +124,7 @@ namespace SistemskoProjekatDrugi
                                     ret = PretrazivacFajlova.PretraziBezTaskova(kljuc);
                                     var vreme_bez_taskova = zaustaviStopwatch();
 
-                                    Console.WriteLine($"Vreme bez taskova: {vreme_bez_taskova}s ret je \n{ret.Substring(0, 300)}");
+                                    Console.WriteLine($"Vreme BEZ taskova: {vreme_bez_taskova}s");
 
                                     m_kes.Upisi(kljuc, ret);
 
@@ -132,7 +132,7 @@ namespace SistemskoProjekatDrugi
                                     ret = await PretrazivacFajlova.PretraziSaTaskovima(kljuc);
                                     var vreme_sa_taskovima = zaustaviStopwatch();
 
-                                    Console.WriteLine($"Vreme sa taskovima: {vreme_sa_taskovima}s ret je \n{ret.Substring(0, 300)}");
+                                    Console.WriteLine($"Vreme SA taskovima: {vreme_sa_taskovima}s");
                                 }
 
                                 response = "";
