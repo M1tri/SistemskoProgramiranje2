@@ -24,7 +24,6 @@ namespace SistemskoProjekatDrugi
         }
         public static async Task<String> PretraziSaTaskovima(String kljuc)
         {
-     //       Console.WriteLine("Usao u pretragu sa taskovima.");
             brojFajlova = 0;
             ret.Clear();
             String content = "";
@@ -100,7 +99,6 @@ namespace SistemskoProjekatDrugi
 
         static async Task<TaskFuncRet> PretraziDirSaTaskovima(String path, String kljuc)
         {
-          //  Console.WriteLine("Usao u: " + path);
             try
             {
                 StringBuilder files = new("");
@@ -147,7 +145,6 @@ namespace SistemskoProjekatDrugi
 
         public static String PretraziBezTaskova(String kljuc)
         {
-         //   Console.WriteLine("Usao u pretragu bez taskova.");
             ret.Clear();
             brojFajlova = 0;
             String content = "";
@@ -213,7 +210,6 @@ namespace SistemskoProjekatDrugi
 
         static String PretraziDirBezTaskova(String path, String kljuc)
         {
-       //     Console.WriteLine("Bez taskova usao u: " + path);
             String files = "";
 
             try
