@@ -121,28 +121,18 @@ namespace SistemskoProjekatDrugi
                                     Console.WriteLine("Nema odgovarajucih podataka u kesu, krece pretraga!");
 
                                     m_stopwatch.Start();
-                                    var task_ret = PretrazivacFajlova.PretraziSaTaskovima(kljuc);
-                                    await task_ret.ContinueWith(task =>
-                                    {
-                                        if (task.Status == TaskStatus.RanToCompletion)
-                                        {
-                                            var vreme_sa_taskovima = zaustaviStopwatch();
-                                            Console.WriteLine($"Vreme sa taskovima: {vreme_sa_taskovima}s");
-                                            ret = task.Result;
-                                        }
-                                        else if (task.IsFaulted)
-                                        {
-                                            Console.WriteLine("Doslo je do pojave greske prilikom izvrsenja taska");
-                                        }
-                                    });
-
-                                    m_stopwatch.Start();
                                     ret = PretrazivacFajlova.PretraziBezTaskova(kljuc);
                                     var vreme_bez_taskova = zaustaviStopwatch();
 
-                                    Console.WriteLine($"Vreme bez taskova: {vreme_bez_taskova}s");
+                                    Console.WriteLine($"Vreme bez taskova: {vreme_bez_taskova}s ret je \n{ret.Substring(0, 300)}");
 
                                     m_kes.Upisi(kljuc, ret);
+
+                                    m_stopwatch.Start();
+                                    ret = await PretrazivacFajlova.PretraziSaTaskovima(kljuc);
+                                    var vreme_sa_taskovima = zaustaviStopwatch();
+
+                                    Console.WriteLine($"Vreme sa taskovima: {vreme_sa_taskovima}s ret je \n{ret.Substring(0, 300)}");
                                 }
 
                                 response = "";

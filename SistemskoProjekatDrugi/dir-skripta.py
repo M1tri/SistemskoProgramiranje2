@@ -2,8 +2,8 @@ import os
 import random
 import string
 
-MAX_DUBINA = 6
-MAX_PODDIR = 6
+MAX_DUBINA = 4
+MAX_PODDIR = 5
 MAX_FAJL = 3
 
 def get_ime():

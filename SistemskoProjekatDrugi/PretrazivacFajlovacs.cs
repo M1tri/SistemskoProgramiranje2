@@ -24,6 +24,7 @@ namespace SistemskoProjekatDrugi
         }
         public static async Task<String> PretraziSaTaskovima(String kljuc)
         {
+     //       Console.WriteLine("Usao u pretragu sa taskovima.");
             brojFajlova = 0;
             ret.Clear();
             String content = "";
@@ -48,19 +49,18 @@ namespace SistemskoProjekatDrugi
 
                 var taskovi = new List<Task<TaskFuncRet>>();
 
-                foreach (String dir in direktorijumi)
+                Parallel.ForEach(direktorijumi, dir =>
                 {
                     taskovi.Add(PretraziDirSaTaskovima(dir, kljuc));
-                }
+                });
 
-                await Task.WhenAll(taskovi);
+                var rets = await Task.WhenAll(taskovi);
 
-                foreach (var t in taskovi)
+                foreach (var r in rets)
                 {
-                    ret.Append(t.Result.fajlovi);
-                    brojFajlova += t.Result.brojFajlova;
+                    ret.Append(r.fajlovi);
+                    brojFajlova += r.brojFajlova;
                 }
-
             }
             catch (Exception e)
             {
@@ -100,6 +100,7 @@ namespace SistemskoProjekatDrugi
 
         static async Task<TaskFuncRet> PretraziDirSaTaskovima(String path, String kljuc)
         {
+          //  Console.WriteLine("Usao u: " + path);
             try
             {
                 StringBuilder files = new("");
@@ -121,17 +122,17 @@ namespace SistemskoProjekatDrugi
 
                 var taskovi = new List<Task<TaskFuncRet>>();
 
-                foreach(String dir in direktorijumi)
+                Parallel.ForEach(direktorijumi, dir =>
                 {
                     taskovi.Add(PretraziDirSaTaskovima(dir, kljuc));
-                }
+                });
 
-                await Task.WhenAll(taskovi);
+                var rets = await Task.WhenAll(taskovi);
 
-                foreach (var t in taskovi)
+                foreach (var r in rets)
                 {
-                    files.Append(t.Result.fajlovi);
-                    brFiles += t.Result.brojFajlova;
+                    files.Append(r.fajlovi);
+                    brFiles += r.brojFajlova;
                 }
 
                 return new TaskFuncRet(files.ToString(), brFiles);
@@ -146,6 +147,7 @@ namespace SistemskoProjekatDrugi
 
         public static String PretraziBezTaskova(String kljuc)
         {
+         //   Console.WriteLine("Usao u pretragu bez taskova.");
             ret.Clear();
             brojFajlova = 0;
             String content = "";
@@ -211,6 +213,7 @@ namespace SistemskoProjekatDrugi
 
         static String PretraziDirBezTaskova(String path, String kljuc)
         {
+       //     Console.WriteLine("Bez taskova usao u: " + path);
             String files = "";
 
             try
